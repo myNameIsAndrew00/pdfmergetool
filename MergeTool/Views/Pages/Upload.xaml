@@ -1,0 +1,32 @@
+﻿<config:BasePage
+             x:TypeArguments="core:UploadViewModel"
+             x:Class="MergeTool.Views.Pages.Upload"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:core="clr-namespace:MergeTool.ViewModel.Pages;assembly=MergeTool.ViewModel"
+             xmlns:config="clr-namespace:MergeTool"
+             mc:Ignorable="d" 
+             d:DesignHeight="500" d:DesignWidth="800"
+             xmlns:converters="clr-namespace:MergeTool.Converters"
+             xmlns:property="clr-namespace:MergeTool.Properties"
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp"
+    >
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel>
+            <Image Width="150" Height="150">
+                <Image.Source>
+                    <BitmapImage UriSource="/Resources/Images/logo.png"></BitmapImage>
+                </Image.Source>
+            </Image>
+            
+            <TextBlock TextAlignment="Center" Margin="0 20 0 5" FontSize="30">PDF Merge Tool</TextBlock>
+            <TextBlock TextAlignment="Center" Margin="0 20 0 5">Select .pdf files to merge.</TextBlock>
+
+            <Button Command="{Binding ChoseFilesCommand}" Margin="0 5 0 0" Width="250" >Select files</Button>
+ 
+        </StackPanel>
+        
+    </Grid>
+</config:BasePage>

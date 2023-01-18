@@ -15,7 +15,7 @@ namespace MergeTool.ViewModel
 
             if (!this.OfficeInstalled())
             {
-                Application.ChangeStatus("Microsoft Office is installed. Excel or word files will not be allowed for merging.", InfoStatus.Warning);
+                Application.ChangeStatus("Microsoft Office is not installed. Excel or word files will not be allowed for merging.", InfoStatus.Warning);
             }
         }
 

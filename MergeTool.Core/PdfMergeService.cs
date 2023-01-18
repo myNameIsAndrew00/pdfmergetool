@@ -1,5 +1,5 @@
 ﻿using MergeTool.Core.Abstractions;
-using MergeTool.Core.Commons;
+using MergeTool.Core.Extensions;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.IO;
 using System;
@@ -10,12 +10,19 @@ using System.Threading.Tasks;
 
 namespace MergeTool.Core
 {
-    public class PdfMergeService : IPdfMergeService
+    internal class PdfMergeService : IPdfMergeService
     {
+        private IPdfAdaptersFactory _adaptersFactory;
+
+        public PdfMergeService(IPdfAdaptersFactory factory)
+        {
+            _adaptersFactory = factory;
+        }
+
         public bool Merge(string destinationPath, params string[] pdfPaths)
         {
 
-            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             // Check file paths
             if (pdfPaths is null)
@@ -24,24 +31,36 @@ namespace MergeTool.Core
             if (pdfPaths.Length == 0)
                 return false;
 
-          
+
 
             // Iterate pdf paths and build the merged document.
             try
             {
                 using PdfDocument destinationDocument = new PdfDocument(destinationPath);
-               
+
                 bool destinationHasPages = false;
 
                 foreach (var sourcePdfPath in pdfPaths)
                 {
+                    // Check if file path is valid.
                     if (!File.Exists(sourcePdfPath))
                         continue;
 
-                    using (PdfDocument sourcePdf = PdfReader.Open(sourcePdfPath, PdfDocumentOpenMode.Import))
+                    // Try to retrieve an adapter for the given file using the adapters factory.
+                    using IPdfAdapter? adapter = _adaptersFactory.CreateAdapter(sourcePdfPath);
+
+                    // If adapter is not null, try to get the pdf, then merge it.
+                    if (adapter != null)
                     {
-                        sourcePdf.CopyPages(destinationDocument);
-                        destinationHasPages = true;
+                        using Stream? stream = adapter.OpenRead();
+
+                        if (stream != null)
+                        {
+                            using PdfDocument sourcePdf = PdfReader.Open(stream, PdfDocumentOpenMode.Import);
+
+                            sourcePdf.CopyPages(destinationDocument);
+                            destinationHasPages = true;
+                        }
                     }
                 }
 
@@ -49,11 +68,12 @@ namespace MergeTool.Core
 
                 return destinationHasPages;
             }
-            catch
-            {
+            catch(Exception e)
+            { 
                 if (File.Exists(destinationPath))
+                {
                     File.Delete(destinationPath);
-
+                }
                 return false;
             }
 

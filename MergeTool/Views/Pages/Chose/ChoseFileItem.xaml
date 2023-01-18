@@ -19,7 +19,7 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
-        <fa:IconBlock Foreground="{Binding Color,  Converter={converters:ColorHexToColorConverter}}" Icon="FilePdf" FontSize="40" HorizontalAlignment="Left"></fa:IconBlock>
+        <fa:IconBlock Foreground="{Binding Color,  Converter={converters:ColorHexToColorConverter}}" Icon="{Binding DisplayName,  Converter={converters:FileNameToIconConverter}}" FontSize="40" HorizontalAlignment="Left"></fa:IconBlock>
         <StackPanel Orientation="Vertical" Grid.Column="1">
             <TextBlock VerticalAlignment="Center">File name:</TextBlock>
             <TextBlock VerticalAlignment="Center" FontSize="16" Foreground="DarkSlateBlue" FontWeight="DemiBold" Text="{Binding DisplayName}" TextWrapping="Wrap"/>

@@ -31,7 +31,7 @@ namespace MergeTool.Views.Pages
                 OpenFileDialog fileDialog = new OpenFileDialog();
 
                 fileDialog.Multiselect = true;
-                fileDialog.Filter = "PDF files|*.pdf";
+                fileDialog.Filter = string.Join('|', this.DataContextModel.AllowedFormats.Select(item => $"{item.Label}|{item.Extension}")); 
                 fileDialog.FilterIndex = 1;
               
                 if (fileDialog.ShowDialog() == DialogResult.OK)

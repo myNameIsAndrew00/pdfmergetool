@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MergeTool.ViewModel
+namespace MergeTool.ViewModel.Enums
 {
-    public enum ApplicationPages
+    public enum ApplicationPage
     {
         Upload,
         Chose,

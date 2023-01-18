@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MergeTool.Core.Commons
+namespace MergeTool.Core.Extensions
 {
     internal static class PdfSharpExtensions
     {

@@ -47,7 +47,7 @@
                           Icon="Spinner" 
                           Foreground="DarkSlateGray" 
                           HorizontalAlignment="Center" ></fa:IconBlock>
-            <TextBlock Grid.Row="3" Margin="5 2 5 2" Padding="0" Foreground="Red" Text="{Binding ErrorMessage}"></TextBlock>
+            <TextBlock Grid.Row="3" Margin="5 2 5 2" Padding="0" Foreground="Red" Text="{Binding ErrorMessage}" HorizontalAlignment="Center" ></TextBlock>
         </StackPanel>
     </Grid>
 </config:BasePage>

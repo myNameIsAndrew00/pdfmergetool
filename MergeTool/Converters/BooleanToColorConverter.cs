@@ -14,7 +14,7 @@ namespace MergeTool.Converters
         {
             return parameter == null ?
                 (bool)value ? System.Windows.Media.Brushes.Green : System.Windows.Media.Brushes.Red :
-                (bool)value ? System.Windows.Media.Brushes.Red : System.Windows.Media.Brushes.Green; ;
+                (bool)value ? System.Windows.Media.Brushes.Red : System.Windows.Media.Brushes.Green; 
         }
 
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

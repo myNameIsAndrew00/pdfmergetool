@@ -1,4 +1,5 @@
 ﻿using MergeTool.ViewModel;
+using MergeTool.ViewModel.Enums;
 using MergeTool.Views.Pages;
 using MergeTool.Views.Pages.Chose;
 using System;
@@ -17,15 +18,15 @@ namespace MergeTool.Converters
             BasePage page;
 
             //return a page inherited from BasePage
-            switch ((ApplicationPages)value)
+            switch ((ApplicationPage)value)
             {
-                case ApplicationPages.Upload:
+                case ApplicationPage.Upload:
                     page = new Upload();
                     break;
-                case ApplicationPages.Chose:
+                case ApplicationPage.Chose:
                     page = new Chose();
                     break;
-                case ApplicationPages.Success:
+                case ApplicationPage.Success:
                     page = new Success();
                     break;
                 default:

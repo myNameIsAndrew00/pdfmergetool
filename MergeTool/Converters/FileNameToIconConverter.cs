@@ -2,24 +2,33 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MergeTool.Converters
 {
-    public class StringToIconConverter : BaseValueConverter<StringToIconConverter>
+    public class FileNameToIconConverter : BaseValueConverter<FileNameToIconConverter>
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             string valueString = value as string;
 
+            if(valueString is null)
+            {
+                return null;
+            }
+
+            valueString = Path.GetExtension(valueString).Trim('.');
+           
             switch (valueString)
             {
-                case "session": return IconChar.Buffer;
-                case "logs": return IconChar.ClipboardList;
-                case "certificate": return IconChar.Certificate;
-                case "disconnect": return IconChar.SignOutAlt;
+                case "pdf": return IconChar.FilePdf;
+                case "xlsx": return IconChar.FileExcel;
+                case "doc":
+                case "docx": return IconChar.FileWord;
+
                 default: return null;
             }
         }

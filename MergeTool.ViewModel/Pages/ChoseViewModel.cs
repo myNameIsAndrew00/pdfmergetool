@@ -1,5 +1,7 @@
 ﻿using MergeTool.Core;
 using MergeTool.Core.Abstractions;
+using MergeTool.Core.Extensions;
+using MergeTool.ViewModel.Enums;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,7 +53,7 @@ namespace MergeTool.ViewModel.Pages
         {
             GoToUploadCommand = new CommandInitiator( async() =>
             {
-                await Application.ChangePage(ApplicationPages.Upload);
+                await Application.ChangePage(ApplicationPage.Upload);
             });
         }
 
@@ -79,9 +81,8 @@ namespace MergeTool.ViewModel.Pages
         }
 
         public async Task MergeFiles(string destinationPath)
-        {
-            //todo : DI may be done here
-            IPdfMergeService pdfMergeService = new PdfMergeService();
+        { 
+            IPdfMergeService pdfMergeService = this.GetService<IPdfMergeService>()!;
 
             if(!Directory.Exists(destinationPath))
             {
@@ -104,7 +105,7 @@ namespace MergeTool.ViewModel.Pages
             // If action succeed, change the page.
             if(mergeSuccess)
             {
-                await Application.ChangePage(ApplicationPages.Success, fileName);
+                await Application.ChangePage(ApplicationPage.Success, fileName);
             }
             else
             {

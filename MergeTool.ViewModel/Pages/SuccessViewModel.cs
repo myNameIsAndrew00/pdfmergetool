@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MergeTool.ViewModel.Enums;
 
 namespace MergeTool.ViewModel.Pages
 {
@@ -23,7 +24,7 @@ namespace MergeTool.ViewModel.Pages
 
             GoToStartCommand = new CommandInitiator(async () =>
             {
-                await Application.ChangePage(ApplicationPages.Upload);
+                await Application.ChangePage(ApplicationPage.Upload);
             });
 
             OpenFileExplorerCommand = new CommandInitiator(async () =>

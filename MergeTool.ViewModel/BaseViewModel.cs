@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using MergeTool.ViewModel.Enums;
 
 namespace MergeTool.ViewModel
 {
@@ -26,7 +27,7 @@ namespace MergeTool.ViewModel
 
         public ICommand GoBackCommand { get; set; }
 
-        public virtual ApplicationPages PreviousPage { get; set; } = ApplicationPages.Upload;
+        public virtual ApplicationPage PreviousPage { get; set; } = ApplicationPage.Upload;
 
         public BaseViewModel()
         {

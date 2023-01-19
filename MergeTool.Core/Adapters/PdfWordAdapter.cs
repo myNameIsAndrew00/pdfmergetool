@@ -15,6 +15,7 @@ namespace MergeTool.Core.Adapters
     {
         const string WORD_COM_PROG_ID = "Word.Application";
         const ushort EXPORT_PDF_FORMAT = 17;
+        const ushort DISPLAY_ALERTS = 0;
 
         internal static Type? WordCOM;
 
@@ -31,6 +32,8 @@ namespace MergeTool.Core.Adapters
         protected override void GenerateTempFile(string tempFileName)
         {
             dynamic appWord = Activator.CreateInstance(WordCOM);
+
+            appWord.DisplayAlerts = DISPLAY_ALERTS;
             appWord.Options.ConfirmConversions = false;
             appWord.Options.DoNotPromptForConvert = true;
 
